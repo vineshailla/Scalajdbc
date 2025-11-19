@@ -17,6 +17,7 @@ class H2DatabaseInsertTest extends AnyFlatSpec with Matchers with MockitoSugar{
   "insert table" should "insert into h2 database succesfully" in{
     val connection = H2DatabaseData.getConnection()
     val statement = connection.createStatement()
+    statement.executeUpdate("DROP TABLE IF EXISTS Artist")
     statement.execute(TestSchema.createArtistTable)
     loggerFactory.info("created successfully")
     val result = CsvTable.insertTable(TestSchema.artists,H2DatabaseData)

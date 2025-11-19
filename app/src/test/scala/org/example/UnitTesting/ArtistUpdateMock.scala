@@ -5,11 +5,12 @@ import org.mockito.ArgumentMatchers.anyString
 import org.mockito.scalatest.MockitoSugar
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
+import org.slf4j.LoggerFactory
 
 import java.sql.{Connection, Statement}
 
 class ArtistUpdateMock extends AnyFlatSpec with Matchers with MockitoSugar {
-
+  val logger = LoggerFactory.getLogger(getClass)
   "Service.CsvTable" should "update the artist test case" in {
     val mockConfig = mock[ConfigTrait]
     val mockConnection = mock[Connection]

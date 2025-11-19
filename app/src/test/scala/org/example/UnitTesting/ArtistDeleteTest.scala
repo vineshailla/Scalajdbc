@@ -6,10 +6,12 @@ import org.mockito.ArgumentMatchers.anyString
 import org.mockito.scalatest.MockitoSugar
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
+import org.slf4j.LoggerFactory
 
 import java.sql.{Connection, Statement}
 
 class ArtistDeleteTest extends AnyFlatSpec with Matchers with MockitoSugar {
+  val logger = LoggerFactory.getLogger(getClass)
 
   "Service.CsvTable" should "delete the artist test case" in {
     val mockConfig = mock[ConfigTrait]
@@ -19,6 +21,7 @@ class ArtistDeleteTest extends AnyFlatSpec with Matchers with MockitoSugar {
     when(mockConnection.createStatement()).thenReturn(mockStatement)
     when(mockStatement.executeUpdate(anyString())).thenReturn(1)
     doNothing.when(mockConnection).close()
+    logger.info("data is deleted")
     val result = CsvTable.deleteTable(mockConfig)
     verify(mockConfig).getConnection()
     verify(mockConnection).createStatement()

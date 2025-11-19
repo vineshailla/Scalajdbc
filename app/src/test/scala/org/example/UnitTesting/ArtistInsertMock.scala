@@ -2,6 +2,7 @@ package org.example.UnitTesting
 import Etl.Config.ConfigTrait
 import Etl.Model.Artists
 import Etl.Sevice.CsvTable
+import org.junit.platform.commons.logging.LoggerFactory
 import org.mockito.ArgumentMatchers.{anyInt, anyString}
 import org.mockito.scalatest.MockitoSugar
 import org.scalatest.flatspec.AnyFlatSpec
@@ -12,6 +13,7 @@ import java.sql.{Connection, PreparedStatement}
 class ArtistInsertMock extends AnyFlatSpec with Matchers with MockitoSugar {
 
   "insert table" should "insert batch of artists" in {
+    val logger = LoggerFactory.getLogger(getClass)
     // Mock the dependencies - use ConfigTrait instead of ConfigurationData.type
     val mockConfig = mock[ConfigTrait]
     val mockConnection = mock[Connection]
